@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-8tyc5^&-4r0=j%f-*sp6#366j(du5&jnjeqa4)mtd81&@ima(=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['yourdomain.com', '127.0.0.1']
+ALLOWED_HOSTS = ['yourdomain.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     # new apps
     'store.apps.StoreConfig',
     'basket.apps.BasketConfig',
+    'account.apps.AccountConfig',
+    'payment.apps.PaymentConfig',
+    'order.apps.OrderConfig'
 ]
 
 MIDDLEWARE = [
@@ -131,3 +134,16 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+STATICFILES_DIRS = [BASE_DIR / 'static']
+
+
+# custom user model
+AUTH_USER_MODEL = 'account.UserBase'
+LOGIN_REDIRECT_URL = '/account/dashboard'
+LOGIN_URL = '/account/login/'
+
+# Email setting
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Stripe Payment
+STRIPE_ENDPOINT_SECRET = 'whsec_2e68ca69c84792bea3fd3e3f2dff84ffbf616aa5702635187302412ce84b08b0'
